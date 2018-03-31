@@ -116,7 +116,6 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\libcef_dll\ptr_util.h" />

@@ -27,6 +27,11 @@
     <ClCompile Include="DockingFeature\StaticDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CCefSimple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simple_app.cc" />
+    <ClCompile Include="simple_handler.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DockingFeature\DockingDlgInterface.h">
@@ -57,6 +62,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DockingFeature\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCefSimple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simple_app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simple_handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

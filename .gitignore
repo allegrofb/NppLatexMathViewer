@@ -241,3 +241,9 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+
+cef_binary/Resources/
+cef_binary/tests/
+cef_binary/cefsimple/
+

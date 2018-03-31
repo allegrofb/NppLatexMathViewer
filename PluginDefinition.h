@@ -28,7 +28,7 @@
 //-------------------------------------//
 // Here define your plugin name
 //
-const TCHAR NPP_PLUGIN_NAME[] = TEXT("Notepad++ plugin demo");
+const TCHAR NPP_PLUGIN_NAME[] = TEXT("Latex Math Viewer");
 
 //-----------------------------------------------//
 //-- STEP 2. DEFINE YOUR PLUGIN COMMAND NUMBER --//
@@ -36,7 +36,8 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("Notepad++ plugin demo");
 //
 // Here define the number of your plugin commands
 //
-const int nbFunc = 16;
+//const int nbFunc = 16;
+const int nbFunc = 17;
 
 
 //
@@ -85,6 +86,6 @@ void getFileNamesDemo();
 void getSessionFileNamesDemo();
 void saveCurrentSessionDemo();
 void DockableDlgDemo();
-
+void ShowCefSimple();
 
 #endif //PLUGINDEFINITION_H

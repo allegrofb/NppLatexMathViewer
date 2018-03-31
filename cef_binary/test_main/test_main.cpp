@@ -4,8 +4,6 @@
 #include "stdafx.h"
 
 #include <windows.h>
-
-
 #include "include/cef_sandbox_win.h"
 #include "simple_app.h"
 
@@ -58,11 +56,14 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
 	//for (;;)
 	//	i++;
 
+	settings.multi_threaded_message_loop = 1;
+
 	// Initialize CEF in the main process.
 	CefInitialize(main_args, settings, app.get(), sandbox_info);
 
 	// Run the CEF message loop. This will block until CefQuitMessageLoop() is called.
-	CefRunMessageLoop();
+	//CefRunMessageLoop();
+	Sleep(30000);
 
 	// Shut down CEF.
 	CefShutdown();

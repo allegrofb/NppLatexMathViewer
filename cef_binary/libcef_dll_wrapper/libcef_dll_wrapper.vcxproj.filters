@@ -1661,9 +1661,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\libcef_dll\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="include">
       <UniqueIdentifier>{D122C365-ABFC-3429-A93B-D00C8FABA6D7}</UniqueIdentifier>
     </Filter>

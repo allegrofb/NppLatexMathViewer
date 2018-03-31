@@ -25,12 +25,14 @@
 #include <time.h>
 #include <shlwapi.h>
 #include "GoToLineDlg.h"
+#include "CCefSimple.h"
 
 const TCHAR sectionName[] = TEXT("Insert Extesion");
 const TCHAR keyName[] = TEXT("doCloseTag");
 const TCHAR configFileName[] = TEXT("pluginDemo.ini");
 
 DemoDlg _goToLine;
+CCefSimple _cefSimple;
 
 #ifdef UNICODE 
 	#define generic_itoa _itow
@@ -50,6 +52,7 @@ TCHAR iniFilePath[MAX_PATH];
 bool doCloseTag = false;
 
 #define DOCKABLE_DEMO_INDEX 15
+#define CEFSIMPLE_INDEX 16
 
 //
 // Initialize your plugin data here
@@ -58,6 +61,7 @@ void pluginInit(HANDLE hModule)
 {
 	// Initialize dockable demo dialog
 	_goToLine.init((HINSTANCE)hModule, NULL);
+	_cefSimple.Init((HINSTANCE)hModule);
 }
 
 //
@@ -66,6 +70,8 @@ void pluginInit(HANDLE hModule)
 void pluginCleanUp()
 {
 	::WritePrivateProfileString(sectionName, keyName, doCloseTag?TEXT("1"):TEXT("0"), iniFilePath);
+	_cefSimple.CleanUp();
+
 }
 
 //
@@ -141,6 +147,7 @@ void commandMenuInit()
 	setCommand(14, TEXT("---"), NULL, NULL, false);
 
 	setCommand(DOCKABLE_DEMO_INDEX, TEXT("Dockable Dialog Demo"), DockableDlgDemo, NULL, false);
+	setCommand(CEFSIMPLE_INDEX, TEXT("Cef Simple Dialog"), ShowCefSimple, NULL, false);
 }
 
 
@@ -457,4 +464,31 @@ void DockableDlgDemo()
 	}
 	_goToLine.display();
 }
+
+
+void ShowCefSimple()
+{
+	_cefSimple.Init2();
+
+	//_goToLine.setParent(nppData._nppHandle);
+	//tTbData	data = { 0 };
+
+	//if (!_goToLine.isCreated())
+	//{
+	//	_goToLine.create(&data);
+
+	//	// define the default docking behaviour
+	//	data.uMask = DWS_DF_CONT_RIGHT;
+
+	//	data.pszModuleName = _goToLine.getPluginFileName();
+
+	//	// the dlgDlg should be the index of funcItem where the current function pointer is
+	//	// in this case is DOCKABLE_DEMO_INDEX
+	//	data.dlgID = DOCKABLE_DEMO_INDEX;
+	//	::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+	//}
+	//_goToLine.display();
+}
+
+
 
