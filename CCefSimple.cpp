@@ -53,6 +53,7 @@
 
 void CCefSimple::Init(HINSTANCE hInstance)
 {
+	SetDllDirectory(L"C:\\Program Files\\Notepad++\\plugins\\cef");
 	_instance = hInstance;
 }
 
@@ -105,7 +106,7 @@ void CCefSimple::Init2()
 
 	settings.multi_threaded_message_loop = 1;
 
-	CefString(&settings.browser_subprocess_path).FromASCII("C:/Program Files/Notepad++/plugins/sub_process.exe");
+	CefString(&settings.browser_subprocess_path).FromASCII("C:/Program Files/Notepad++/plugins/cef/sub_process.exe");
 
 	// Initialize CEF in the main process.
 	CefInitialize(main_args, settings, app.get(), sandbox_info);

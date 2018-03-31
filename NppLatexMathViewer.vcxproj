@@ -330,6 +330,7 @@
       <ProgramDatabaseFile>$(OutDir)NppLatexMathViewer.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <ImportLibrary>$(OutDir)NppLatexMathViewer.lib</ImportLibrary>
+      <DelayLoadDLLs>libcef.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
     <PostBuildEvent>
       <Message>Adding manifest...																	</Message>
