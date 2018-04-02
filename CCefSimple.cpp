@@ -2,6 +2,7 @@
 #include "CCefSimple.h"
 #include "include/cef_sandbox_win.h"
 #include "simple_app.h"
+#include <string>
 
 #if defined(CEF_USE_SANDBOX)
 // The cef_sandbox.lib static library is currently built with VS2013. It may not
@@ -53,7 +54,13 @@
 
 void CCefSimple::Init(HINSTANCE hInstance)
 {
-	SetDllDirectory(L"C:\\Program Files\\Notepad++\\plugins\\cef");
+	wchar_t exeFullPath[MAX_PATH]; // Full path  
+	GetModuleFileNameW(NULL, exeFullPath, MAX_PATH);
+	std::wstring strPath(exeFullPath);
+	int pos = strPath.find_last_of('\\', strPath.length());
+	_path = strPath.substr(0, pos);  // Return the directory without the file name  
+	_path = _path + L"\\plugins\\cef";
+	SetDllDirectory(_path.c_str());
 	_instance = hInstance;
 }
 
@@ -106,7 +113,8 @@ void CCefSimple::Init2()
 
 	settings.multi_threaded_message_loop = 1;
 
-	CefString(&settings.browser_subprocess_path).FromASCII("C:/Program Files/Notepad++/plugins/cef/sub_process.exe");
+	CefString(&settings.browser_subprocess_path).FromWString(_path+L"\\sub_process.exe");
+	//CefString(&settings.browser_subprocess_path).FromASCII("C:/Program Files/Notepad++/plugins/cef/sub_process.exe");
 
 	// Initialize CEF in the main process.
 	CefInitialize(main_args, settings, app.get(), sandbox_info);

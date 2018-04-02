@@ -84,7 +84,8 @@ void SimpleApp::OnContextInitialized() {
   // that instead of the default URL.
   url = command_line->GetSwitchValue("url");
   if (url.empty())
-    url = "http://www.baidu.com";
+    //url = "http://www.baidu.com";
+	  url = "file://D:/Program Files/Notepad++/plugins/cef/example.html";    
 
   if (use_views) {
     // Create the BrowserView.

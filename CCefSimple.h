@@ -3,6 +3,7 @@
 #define CCEFSIMPLE_H
 
 #include <windows.h>
+#include <string>
 
 class CCefSimple 
 {
@@ -27,6 +28,7 @@ public :
 private :
 	int flag = 0;
 	HINSTANCE _instance = NULL;
+	std::wstring _path;
     //int getLine() const {
     //    BOOL isSuccessful;
     //    int line = ::GetDlgItemInt(_hSelf, ID_GOLINE_EDIT, &isSuccessful, FALSE);
