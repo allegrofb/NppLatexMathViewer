@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
+    <Filter Include="OsrWindow">
+      <UniqueIdentifier>{bc3e954e-794a-47d9-9683-8ee18f6bc16e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DockingFeature\GoToLineDlg.cpp">
@@ -30,8 +33,21 @@
     <ClCompile Include="CCefSimple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="simple_app.cc" />
-    <ClCompile Include="simple_handler.cc" />
+    <ClCompile Include="simple_app.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simple_handler.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OsrWindow\NppCefApp.cpp">
+      <Filter>OsrWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="OsrWindow\NppDialog.cpp">
+      <Filter>OsrWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="OsrWindow\osr_renderer.cc">
+      <Filter>OsrWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DockingFeature\DockingDlgInterface.h">
@@ -72,6 +88,15 @@
     </ClInclude>
     <ClInclude Include="simple_handler.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OsrWindow\NppCefApp.h">
+      <Filter>OsrWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="OsrWindow\NppDialog.h">
+      <Filter>OsrWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="OsrWindow\osr_renderer.h">
+      <Filter>OsrWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

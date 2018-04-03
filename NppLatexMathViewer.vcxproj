@@ -324,7 +324,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>cef_binary\Debug\libcef.lib;cef_binary\libcef_dll_wrapper\Debug\libcef_dll_wrapper.lib;comctl32.lib;rpcrt4.lib;shlwapi.lib;ws2_32.lib;dbghelp.lib;psapi.lib;version.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cef_binary\Debug\libcef.lib;cef_binary\libcef_dll_wrapper\Debug\libcef_dll_wrapper.lib;comctl32.lib;rpcrt4.lib;shlwapi.lib;ws2_32.lib;dbghelp.lib;psapi.lib;version.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>x64\Unicode Debug\NppLatexMathViewer_Debug.dll</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)NppLatexMathViewer.pdb</ProgramDatabaseFile>
@@ -351,6 +351,9 @@ if %errorlevel% neq 0 goto :VCEnd
     <ClCompile Include="DockingFeature\GoToLineDlg.cpp" />
     <ClCompile Include="DockingFeature\StaticDialog.cpp" />
     <ClCompile Include="NppPluginDemo.cpp" />
+    <ClCompile Include="OsrWindow\NppCefApp.cpp" />
+    <ClCompile Include="OsrWindow\NppDialog.cpp" />
+    <ClCompile Include="OsrWindow\osr_renderer.cc" />
     <ClCompile Include="PluginDefinition.cpp" />
     <ClCompile Include="simple_app.cc" />
     <ClCompile Include="simple_handler.cc" />
@@ -364,6 +367,9 @@ if %errorlevel% neq 0 goto :VCEnd
     <ClInclude Include="DockingFeature\Window.h" />
     <ClInclude Include="menuCmdID.h" />
     <ClInclude Include="Notepad_plus_msgs.h" />
+    <ClInclude Include="OsrWindow\NppCefApp.h" />
+    <ClInclude Include="OsrWindow\NppDialog.h" />
+    <ClInclude Include="OsrWindow\osr_renderer.h" />
     <ClInclude Include="PluginDefinition.h" />
     <ClInclude Include="PluginInterface.h" />
     <ClInclude Include="Scintilla.h" />

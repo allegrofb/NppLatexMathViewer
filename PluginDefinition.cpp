@@ -26,6 +26,7 @@
 #include <shlwapi.h>
 #include "GoToLineDlg.h"
 #include "CCefSimple.h"
+#include "OsrWindow\NppDialog.h"
 
 const TCHAR sectionName[] = TEXT("Insert Extesion");
 const TCHAR keyName[] = TEXT("doCloseTag");
@@ -33,6 +34,7 @@ const TCHAR configFileName[] = TEXT("pluginDemo.ini");
 
 DemoDlg _goToLine;
 CCefSimple _cefSimple;
+NppDialog _nppDialog;
 
 #ifdef UNICODE 
 	#define generic_itoa _itow
@@ -62,6 +64,7 @@ void pluginInit(HANDLE hModule)
 	// Initialize dockable demo dialog
 	_goToLine.init((HINSTANCE)hModule, NULL);
 	_cefSimple.Init((HINSTANCE)hModule);
+	_nppDialog.init((HINSTANCE)hModule, NULL);
 }
 
 //
@@ -468,26 +471,27 @@ void DockableDlgDemo()
 
 void ShowCefSimple()
 {
-	_cefSimple.Init2();
+	//_cefSimple.Init2();
 
-	//_goToLine.setParent(nppData._nppHandle);
-	//tTbData	data = { 0 };
 
-	//if (!_goToLine.isCreated())
-	//{
-	//	_goToLine.create(&data);
+	_nppDialog.setParent(nppData._nppHandle);
+	tTbData	data = { 0 };
 
-	//	// define the default docking behaviour
-	//	data.uMask = DWS_DF_CONT_RIGHT;
+	if (!_nppDialog.isCreated())
+	{
+		_nppDialog.create(&data);
 
-	//	data.pszModuleName = _goToLine.getPluginFileName();
+		// define the default docking behaviour
+		data.uMask = DWS_DF_CONT_RIGHT;
 
-	//	// the dlgDlg should be the index of funcItem where the current function pointer is
-	//	// in this case is DOCKABLE_DEMO_INDEX
-	//	data.dlgID = DOCKABLE_DEMO_INDEX;
-	//	::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
-	//}
-	//_goToLine.display();
+		data.pszModuleName = _nppDialog.getPluginFileName();
+
+		// the dlgDlg should be the index of funcItem where the current function pointer is
+		// in this case is DOCKABLE_DEMO_INDEX
+		data.dlgID = DOCKABLE_DEMO_INDEX;
+		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+	}
+	_nppDialog.display();
 }
 
 
