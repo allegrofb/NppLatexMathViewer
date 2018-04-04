@@ -73,6 +73,15 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 {
 	switch (notifyCode->nmhdr.code) 
 	{
+
+		case SCN_UPDATEUI:
+		{
+			char conent[256] = "";
+			::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)conent);
+
+			break;
+		}
+
 		case SCN_CHARADDED:
 		{
 			LangType docType;
