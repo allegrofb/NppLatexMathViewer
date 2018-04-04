@@ -3,11 +3,28 @@
 
 #include "DockingDlgInterface.h"
 #include "resource.h"
+#include <string>
+#include "simple_app.h"
 
 class NppDialog : public DockingDlgInterface
 {
 public :
 	NppDialog() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
+
+	virtual void init(HINSTANCE hInst, HWND parent)
+	{
+		DockingDlgInterface::init(hInst, parent);
+
+		wchar_t exeFullPath[MAX_PATH]; // Full path  
+		GetModuleFileNameW(NULL, exeFullPath, MAX_PATH);
+		std::wstring strPath(exeFullPath);
+		int pos = strPath.find_last_of('\\', strPath.length());
+		_path = strPath.substr(0, pos);  // Return the directory without the file name  
+		_path = _path + L"\\plugins\\cef";
+		SetDllDirectory(_path.c_str());
+
+	}
+
 
     virtual void display(bool toShow = true) const {
         DockingDlgInterface::display(toShow);
@@ -18,6 +35,11 @@ public :
 	void setParent(HWND parent2set){
 		_hParent = parent2set;
 	};
+
+
+	void CleanUp();
+	void InitCef();
+	void CreateBrowser();
 
 protected :
 	virtual BOOL CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
@@ -30,6 +52,9 @@ private :
         return (isSuccessful?line:-1);
     };
 
+private:
+	int _flag = 0;
+	std::wstring _path;
 };
 
 #endif //NPP_DIALOG_H

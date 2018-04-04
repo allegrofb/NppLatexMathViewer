@@ -50,6 +50,8 @@ class SimpleHandler : public CefClient,
 
   bool IsClosing() const { return is_closing_; }
 
+  void OnSize(int width, int height);
+
  private:
   // Platform-specific implementation.
   void PlatformTitleChange(CefRefPtr<CefBrowser> browser,

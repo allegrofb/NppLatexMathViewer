@@ -63,7 +63,7 @@ void pluginInit(HANDLE hModule)
 {
 	// Initialize dockable demo dialog
 	_goToLine.init((HINSTANCE)hModule, NULL);
-	_cefSimple.Init((HINSTANCE)hModule);
+	//_cefSimple.Init((HINSTANCE)hModule);
 	_nppDialog.init((HINSTANCE)hModule, NULL);
 }
 
@@ -73,7 +73,8 @@ void pluginInit(HANDLE hModule)
 void pluginCleanUp()
 {
 	::WritePrivateProfileString(sectionName, keyName, doCloseTag?TEXT("1"):TEXT("0"), iniFilePath);
-	_cefSimple.CleanUp();
+	//_cefSimple.CleanUp();
+	_nppDialog.CleanUp();
 
 }
 
@@ -473,6 +474,7 @@ void ShowCefSimple()
 {
 	//_cefSimple.Init2();
 
+	_nppDialog.InitCef();
 
 	_nppDialog.setParent(nppData._nppHandle);
 	tTbData	data = { 0 };

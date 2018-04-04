@@ -17,6 +17,8 @@
 
 #include "NppDialog.h"
 #include "PluginDefinition.h"
+#include "..\simple_handler.h"
+#include "windows.h"
 
 extern NppData nppData;
 
@@ -49,8 +51,119 @@ BOOL CALLBACK NppDialog::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 				return FALSE;
 		}
 
+		case WM_INITDIALOG:
+		{
+			CreateBrowser();
+			break;
+		}
+
+		case WM_SIZE: //改变窗口消息
+		{
+			// extract size info
+			int width = LOWORD(lParam);
+			int height = HIWORD(lParam);
+
+			if (SimpleHandler::GetInstance())
+			{
+				SimpleHandler::GetInstance()->OnSize(width,height);
+			}
+			//if (_browser)
+			//{
+			//	CefWindowHandle hwnd = _browser->GetHost()->GetWindowHandle();
+			//	::MoveWindow(hwnd, 0, 0, width, height, TRUE);
+			//}
+
+			break;
+		}
+
 		default :
 			return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
 	}
 }
 
+void NppDialog::CleanUp()
+{
+	if (_flag)
+	{
+		CefShutdown();
+	}
+}
+
+void NppDialog::CreateBrowser()
+{
+	CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));
+	CefWindowInfo window_info;
+	RECT rt;
+	GetWindowRect(this->_hSelf, &rt);
+	window_info.SetAsChild(this->_hSelf, rt);
+	CefBrowserSettings settings;
+	//CefBrowserHost::CreateBrowser(window_info, handler, "www.baidu.com", settings, NULL);
+	CefBrowserHost::CreateBrowser(window_info, handler, "file://D:/Program Files/Notepad++/plugins/cef/example.html", settings, NULL);
+
+	//CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));
+	//CefBrowserSettings browser_settings;
+	//std::string url = "file://D:/Program Files/Notepad++/plugins/cef/example.html";
+	//CefWindowInfo window_info;
+	//window_info.SetAsWindowless(this->_hSelf);
+
+	//CefBrowserHost::CreateBrowser(window_info, handler, url, browser_settings,NULL);
+
+	return;
+}
+
+
+void NppDialog::InitCef()
+{
+	if (_flag)
+	{
+		return;
+	}
+	_flag = 1;
+	HINSTANCE hInstance = _hInst;
+
+	// Enable High-DPI support on Windows 7 or newer.
+	CefEnableHighDPISupport();
+
+	void* sandbox_info = NULL;
+
+#if defined(CEF_USE_SANDBOX)
+	// Manage the life span of the sandbox information object. This is necessary
+	// for sandbox support on Windows. See cef_sandbox_win.h for complete details.
+	CefScopedSandboxInfo scoped_sandbox;
+	sandbox_info = scoped_sandbox.sandbox_info();
+#endif
+
+	// Provide CEF with command-line arguments.
+	CefMainArgs main_args(hInstance);
+
+
+	// CEF applications have multiple sub-processes (render, plugin, GPU, etc)
+	// that share the same executable. This function checks the command-line and,
+	// if this is a sub-process, executes the appropriate logic.
+	//int exit_code = CefExecuteProcess(main_args, NULL, sandbox_info);
+	//if (exit_code >= 0) {
+	//	// The sub-process has completed so return here.
+	//	return;
+	//}
+
+	// Optional implementation of the CefApp interface.
+	CefRefPtr<SimpleApp> app(new SimpleApp);
+
+	// Populate this structure to customize CEF behavior.
+	CefSettings settings;
+
+#if !defined(CEF_USE_SANDBOX)
+	settings.no_sandbox = true;
+#endif
+
+	settings.multi_threaded_message_loop = 1;
+
+	CefString(&settings.browser_subprocess_path).FromWString(_path + L"\\sub_process.exe");
+	//CefString(&settings.browser_subprocess_path).FromASCII("C:/Program Files/Notepad++/plugins/cef/sub_process.exe");
+
+	// Initialize CEF in the main process.
+	CefInitialize(main_args, settings, app.get(), sandbox_info);
+
+
+
+}

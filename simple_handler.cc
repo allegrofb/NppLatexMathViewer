@@ -139,5 +139,16 @@ void SimpleHandler::PlatformTitleChange(CefRefPtr<CefBrowser> browser,
 	SetWindowText(hwnd, std::wstring(title).c_str());
 }
 
+void SimpleHandler::OnSize(int width, int height)
+{
+	BrowserList::const_iterator it = browser_list_.begin();
+	for (; it != browser_list_.end(); ++it)
+	{
+		HWND hwnd = (*it)->GetHost()->GetWindowHandle();
+		::MoveWindow(hwnd, 0, 0, width, height, TRUE);
+	}
+}
+
+
 
 
