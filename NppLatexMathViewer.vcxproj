@@ -372,12 +372,14 @@ if %errorlevel% neq 0 goto :VCEnd
     <ClInclude Include="OsrWindow\osr_renderer.h" />
     <ClInclude Include="PluginDefinition.h" />
     <ClInclude Include="PluginInterface.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="Scintilla.h" />
     <ClInclude Include="simple_app.h" />
     <ClInclude Include="simple_handler.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DockingFeature\goLine.rc" />
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

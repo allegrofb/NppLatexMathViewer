@@ -5,11 +5,12 @@
 #include "resource.h"
 #include <string>
 #include "simple_app.h"
+#include "resource1.h"
 
 class NppDialog : public DockingDlgInterface
 {
 public :
-	NppDialog() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
+	NppDialog() : DockingDlgInterface(IDD_PLUGIN_LATEXMATH){};
 
 	virtual void init(HINSTANCE hInst, HWND parent)
 	{
