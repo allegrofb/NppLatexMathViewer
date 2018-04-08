@@ -26,22 +26,25 @@ public :
 
 	}
 
-
-    virtual void display(bool toShow = true) const {
+    virtual void display(bool toShow = true) 
+	{
         DockingDlgInterface::display(toShow);
-        if (toShow)
-            ::SetFocus(::GetDlgItem(_hSelf, ID_GOLINE_EDIT));
+		if (toShow)
+		{
+			_showFlag = 1;
+			::SetFocus(::GetDlgItem(_hSelf, ID_GOLINE_EDIT));
+		}
     };
 
-	void setParent(HWND parent2set){
+	void setParent(HWND parent2set)
+	{
 		_hParent = parent2set;
 	};
-
 
 	void CleanUp();
 	void InitCef();
 	void CreateBrowser();
-	int GetFlag() { return _flag; };
+	int GetFlag() { return _showFlag; };
 
 protected :
 	virtual BOOL CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
@@ -56,6 +59,7 @@ private :
 
 private:
 	int _flag = 0;
+	int _showFlag = 0;
 	std::wstring _path;
 };
 

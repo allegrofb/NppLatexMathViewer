@@ -74,7 +74,7 @@ void pluginCleanUp()
 {
 	::WritePrivateProfileString(sectionName, keyName, doCloseTag?TEXT("1"):TEXT("0"), iniFilePath);
 	//_cefSimple.CleanUp();
-	_nppDialog.CleanUp();
+	//_nppDialog.CleanUp();
 
 }
 

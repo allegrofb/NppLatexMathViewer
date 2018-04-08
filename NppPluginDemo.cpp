@@ -74,8 +74,14 @@ extern "C" __declspec(dllexport) FuncItem * getFuncsArray(int *nbF)
 
 extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 {
-	switch (notifyCode->nmhdr.code) 
+	int i = 0;
+	switch (notifyCode->nmhdr.code)
 	{
+		case NPPN_SHUTDOWN:
+		{
+			_nppDialog.CleanUp();
+			break;
+		}
 		case SCN_MODIFIED:
 		{
 			if (_nppDialog.GetFlag())

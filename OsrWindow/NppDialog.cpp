@@ -24,8 +24,40 @@ extern NppData nppData;
 
 BOOL CALLBACK NppDialog::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
+	int i = 0;
 	switch (message) 
 	{
+		case WM_NOTIFY:
+		{
+			LPNMHDR	pnmh = (LPNMHDR)lParam;
+
+			if (pnmh->hwndFrom == _hParent)
+			{
+				switch (LOWORD(pnmh->code))
+				{
+					case DMN_CLOSE:
+					{
+						//SimpleHandler::GetInstance()->CloseAllBrowsers(false);
+						_showFlag = 0;
+						break;
+					}
+					case DMN_FLOAT:
+					{
+						_isFloating = true;
+						break;
+					}
+					case DMN_DOCK:
+					{
+						_isFloating = false;
+						break;
+					}
+					default:
+						break;
+				}
+			}
+			break;
+		}
+
 		case WM_COMMAND : 
 		{
 			switch (wParam)
@@ -76,6 +108,12 @@ BOOL CALLBACK NppDialog::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 
+		case WM_DESTROY:
+		case WM_CLOSE:
+		{
+			i++;
+			break;
+		}
 		default :
 			return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
 	}
@@ -85,6 +123,7 @@ void NppDialog::CleanUp()
 {
 	if (_flag)
 	{
+		SimpleHandler::GetInstance()->CloseAllBrowsers(false);
 		CefShutdown();
 	}
 }
