@@ -149,6 +149,37 @@ void SimpleHandler::OnSize(int width, int height)
 	}
 }
 
+void SimpleHandler::ExecuteJavascript(std::string content)
+{
+	BrowserList::const_iterator it = browser_list_.begin();
+	for (; it != browser_list_.end(); ++it)
+	{
+		int count = (*it)->GetFrameCount();
+		CefRefPtr<CefFrame> mainFrame = (*it)->GetMainFrame();
+		CefRefPtr<CefFrame> focusedFrame = (*it)->GetFocusedFrame();
+
+		int i = 0;
+
+		if (mainFrame.get())
+		{
+			CefString strCode(content);
+			CefString strUrl(L"");
+			mainFrame->ExecuteJavaScript(strCode, strUrl, 0);
+			//mainFrame->ExecuteJavaScript()
+			i++;
+		}
+
+		if (focusedFrame.get())
+		{
+			//mainFrame->ExecuteJavaScript()
+			i++;
+		}
+
+		break;
+	}
+
+	return;
+}
 
 
 

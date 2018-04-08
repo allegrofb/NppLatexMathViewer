@@ -51,6 +51,7 @@ class SimpleHandler : public CefClient,
   bool IsClosing() const { return is_closing_; }
 
   void OnSize(int width, int height);
+  void ExecuteJavascript(std::string content);
 
  private:
   // Platform-specific implementation.

@@ -17,7 +17,10 @@
 
 #include "PluginDefinition.h"
 #include <shlwapi.h>
+#include <regex>
 #include "GoToLineDlg.h"
+#include "simple_handler.h"
+#include "PluginDefinition.h"
 
 extern FuncItem funcItem[nbFunc];
 extern NppData nppData;
@@ -73,12 +76,57 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 {
 	switch (notifyCode->nmhdr.code) 
 	{
+		case SCN_MODIFIED:
+		{
+			if (_nppDialog.GetFlag())
+			{
+				char content[256] = "";
+				::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)content);
 
+				std::string jcode = std::string(content);
+				if (jcode.length() >= 2)
+				{
+					jcode = jcode.replace(jcode.find("\r\n"), 2, "");
+				}
+
+				std::regex ex("\\\\");
+				std::string jcode2 = std::regex_replace(jcode, ex, "\\\\");
+
+				SimpleHandler::GetInstance()->ExecuteJavascript("UpdateMath('" + jcode2 + "');");
+				//SimpleHandler::GetInstance()->ExecuteJavascript("alert('" + jcode + "');");
+			}
+			break;
+		}
 		case SCN_UPDATEUI:
 		{
-			char conent[256] = "";
-			::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)conent);
+			if (_nppDialog.GetFlag())
+			{
+				static int lastLine = -1;
+				int pos = ::SendMessage(nppData._scintillaMainHandle, SCI_GETCURRENTPOS, NULL, NULL);
+				int line = ::SendMessage(nppData._scintillaMainHandle, SCI_LINEFROMPOSITION, pos, NULL);
 
+				if (line == lastLine)
+				{
+					return;
+				}
+
+				lastLine = line;
+
+				char content[256] = "";
+				::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)content);
+
+				std::string jcode = std::string(content);
+				if (jcode.length() >= 2)
+				{
+					jcode = jcode.replace(jcode.find("\r\n"), 2, "");
+				}
+
+				std::regex ex("\\\\");
+				std::string jcode2 = std::regex_replace(jcode, ex, "\\\\");
+
+				SimpleHandler::GetInstance()->ExecuteJavascript("UpdateMath('" + jcode2 + "');");
+				//SimpleHandler::GetInstance()->ExecuteJavascript("alert('" + jcode + "');");
+			}
 			break;
 		}
 

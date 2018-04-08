@@ -40,6 +40,7 @@ public :
 	void CleanUp();
 	void InitCef();
 	void CreateBrowser();
+	int GetFlag() { return _flag; };
 
 protected :
 	virtual BOOL CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);

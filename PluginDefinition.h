@@ -22,6 +22,7 @@
 // All difinitions of plugin interface
 //
 #include "PluginInterface.h"
+#include "OsrWindow\NppDialog.h"
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
@@ -87,5 +88,7 @@ void getSessionFileNamesDemo();
 void saveCurrentSessionDemo();
 void DockableDlgDemo();
 void ShowCefSimple();
+
+extern NppDialog _nppDialog;
 
 #endif //PLUGINDEFINITION_H
