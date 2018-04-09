@@ -79,12 +79,12 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 	{
 		case NPPN_SHUTDOWN:
 		{
-			_nppDialog.CleanUp();
+			_nppDialog.Shutdown();
 			break;
 		}
 		case SCN_MODIFIED:
 		{
-			if (_nppDialog.GetFlag())
+			if (_nppDialog.GetShowFlag())
 			{
 				char content[256] = "";
 				::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)content);
@@ -105,7 +105,7 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 		}
 		case SCN_UPDATEUI:
 		{
-			if (_nppDialog.GetFlag())
+			if (_nppDialog.GetShowFlag())
 			{
 				static int lastLine = -1;
 				int pos = ::SendMessage(nppData._scintillaMainHandle, SCI_GETCURRENTPOS, NULL, NULL);

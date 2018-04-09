@@ -107,11 +107,15 @@ BOOL CALLBACK NppDialog::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 
 			break;
 		}
-
-		case WM_DESTROY:
 		case WM_CLOSE:
 		{
 			i++;
+			break;
+		}
+
+		case WM_DESTROY:
+		{
+			CleanUp();
 			break;
 		}
 		default :
@@ -123,21 +127,38 @@ void NppDialog::CleanUp()
 {
 	if (_flag)
 	{
-		SimpleHandler::GetInstance()->CloseAllBrowsers(false);
 		CefShutdown();
 	}
 }
+
+void NppDialog::Shutdown()
+{
+	if (_flag)
+	{
+		SimpleHandler::GetInstance()->CloseAllBrowsers(false);
+	}
+}
+
 
 void NppDialog::CreateBrowser()
 {
 	CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));
 	CefWindowInfo window_info;
-	RECT rt;
-	GetWindowRect(this->_hSelf, &rt);
-	window_info.SetAsChild(this->_hSelf, rt);
+	RECT rect,rectnew;
+
+	GetClientRect(this->_hSelf,&rect);
+	rectnew = rect;
+	rectnew.top = rect.top + 94;
+	rectnew.bottom = rect.bottom;
+	rectnew.left = rect.left;
+	rectnew.right = rect.right;
+
+	//GetWindowRect(this->_hSelf, &rect);
+	window_info.SetAsChild(this->_hSelf, rect);
 	CefBrowserSettings settings;
 	//CefBrowserHost::CreateBrowser(window_info, handler, "www.baidu.com", settings, NULL);
-	CefBrowserHost::CreateBrowser(window_info, handler, "file://D:/Program Files/Notepad++/plugins/cef/example.html", settings, NULL);
+	CefString url = _path + L"\\example.html";
+	CefBrowserHost::CreateBrowser(window_info, handler, url, settings, NULL);
 
 	//CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));
 	//CefBrowserSettings browser_settings;

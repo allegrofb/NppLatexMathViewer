@@ -90,6 +90,21 @@ BOOL CALLBACK StaticDialog::dlgProc(HWND hwnd, UINT message, WPARAM wParam, LPAR
 			
 			return TRUE;
 		}
+		case WM_DESTROY:
+		{
+			StaticDialog *pStaticDlg = (StaticDialog *)(::GetWindowLongPtr(hwnd, -21));
+			if (!pStaticDlg)
+				return FALSE;
+			return pStaticDlg->run_dlgProc(message, wParam, lParam);
+		}
+
+		case WM_CLOSE:
+		{
+			StaticDialog *pStaticDlg = (StaticDialog *)(::GetWindowLongPtr(hwnd, -21));
+			if (!pStaticDlg)
+				return FALSE;
+			return pStaticDlg->run_dlgProc(message, wParam, lParam);
+		}
 
 		default :
 		{
