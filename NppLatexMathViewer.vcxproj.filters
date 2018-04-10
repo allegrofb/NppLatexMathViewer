@@ -39,6 +39,15 @@
     <ClCompile Include="Cef\ClientHandler.cc">
       <Filter>Cef</Filter>
     </ClCompile>
+    <ClCompile Include="Cef\resource_util.cc">
+      <Filter>Cef</Filter>
+    </ClCompile>
+    <ClCompile Include="Cef\resource_util_win.cc">
+      <Filter>Cef</Filter>
+    </ClCompile>
+    <ClCompile Include="Cef\resource_util_win_impl.cc">
+      <Filter>Cef</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DockingFeature\DockingDlgInterface.h">
@@ -81,6 +90,9 @@
       <Filter>Cef</Filter>
     </ClInclude>
     <ClInclude Include="Cef\ClientHandler.h">
+      <Filter>Cef</Filter>
+    </ClInclude>
+    <ClInclude Include="Cef\resource_util.h">
       <Filter>Cef</Filter>
     </ClInclude>
   </ItemGroup>

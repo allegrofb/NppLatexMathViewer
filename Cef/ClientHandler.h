@@ -6,7 +6,7 @@
 #define CEF_TESTS_CEFSIMPLE_SIMPLE_HANDLER_H_
 
 #include "include/cef_client.h"
-
+#include "include/wrapper/cef_resource_manager.h"
 #include <list>
 
 class SimpleHandler : public CefClient,
@@ -64,6 +64,8 @@ class SimpleHandler : public CefClient,
   // List of existing browser windows. Only accessed on the CEF UI thread.
   typedef std::list<CefRefPtr<CefBrowser>> BrowserList;
   BrowserList browser_list_;
+
+  CefRefPtr<CefResourceManager> resource_manager_;
 
   bool is_closing_;
 

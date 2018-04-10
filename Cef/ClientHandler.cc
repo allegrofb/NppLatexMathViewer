@@ -3,6 +3,7 @@
 // can be found in the LICENSE file.
 
 #include "ClientHandler.h"
+#include "resource_util.h"
 
 #include <sstream>
 #include <string>
@@ -14,9 +15,36 @@
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_helpers.h"
 
+
 namespace {
 
 SimpleHandler* g_instance = NULL;
+
+
+// Add example Providers to the CefResourceManager.
+void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager) {
+	if (!CefCurrentlyOn(TID_IO)) {
+		// Execute on the browser IO thread.
+		CefPostTask(TID_IO, base::Bind(SetupResourceManager, resource_manager));
+		return;
+	}
+
+	const std::string& test_origin = shared::kTestOrigin;
+
+	// Add the Provider for bundled resource files.
+#if defined(OS_WIN)
+	// Read BINARY resources from the executable.
+	resource_manager->AddProvider(
+		shared::CreateBinaryResourceProvider(test_origin), 100, std::string());
+#elif defined(OS_POSIX)
+	// Read individual resource files from a directory on disk.
+	std::string resource_dir;
+	if (shared::GetResourceDir(resource_dir)) {
+		resource_manager->AddDirectoryProvider(test_origin, resource_dir, 100,
+			std::string());
+	}
+#endif
+}
 
 }  // namespace
 

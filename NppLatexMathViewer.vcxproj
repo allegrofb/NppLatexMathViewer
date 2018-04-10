@@ -350,6 +350,9 @@ if %errorlevel% neq 0 goto :VCEnd
     <ClCompile Include="Cef\ClientHandler.cc" />
     <ClCompile Include="Cef\NppCefApp.cpp" />
     <ClCompile Include="Cef\NppDialog.cpp" />
+    <ClCompile Include="Cef\resource_util.cc" />
+    <ClCompile Include="Cef\resource_util_win.cc" />
+    <ClCompile Include="Cef\resource_util_win_impl.cc" />
     <ClCompile Include="DockingFeature\GoToLineDlg.cpp" />
     <ClCompile Include="DockingFeature\StaticDialog.cpp" />
     <ClCompile Include="NppPluginDemo.cpp" />
@@ -359,6 +362,7 @@ if %errorlevel% neq 0 goto :VCEnd
     <ClInclude Include="Cef\ClientHandler.h" />
     <ClInclude Include="Cef\NppCefApp.h" />
     <ClInclude Include="Cef\NppDialog.h" />
+    <ClInclude Include="Cef\resource_util.h" />
     <ClInclude Include="DockingFeature\DockingDlgInterface.h" />
     <ClInclude Include="DockingFeature\GoToLineDlg.h" />
     <ClInclude Include="DockingFeature\resource.h" />
