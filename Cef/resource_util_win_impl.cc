@@ -13,6 +13,10 @@ int GetResourceId(const std::string& resource_path) {
   //  return IDS_LOGO_PNG;
   //if (resource_path == "resource_manager.html")
   //  return IDS_RESOURCE_MANAGER_HTML;
+
+  if (resource_path == "example.html")
+    return IDR_HTML_EXAMPLE;
+	
   return 0;
 }
 

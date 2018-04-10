@@ -379,6 +379,9 @@ if %errorlevel% neq 0 goto :VCEnd
     <ResourceCompile Include="DockingFeature\goLine.rc" />
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="example.html" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
