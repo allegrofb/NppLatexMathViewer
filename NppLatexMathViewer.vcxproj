@@ -347,19 +347,18 @@ if %errorlevel% neq 0 goto :VCEnd
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CCefSimple.cpp" />
+    <ClCompile Include="Cef\ClientHandler.cc" />
+    <ClCompile Include="Cef\NppCefApp.cpp" />
+    <ClCompile Include="Cef\NppDialog.cpp" />
     <ClCompile Include="DockingFeature\GoToLineDlg.cpp" />
     <ClCompile Include="DockingFeature\StaticDialog.cpp" />
     <ClCompile Include="NppPluginDemo.cpp" />
-    <ClCompile Include="OsrWindow\NppCefApp.cpp" />
-    <ClCompile Include="OsrWindow\NppDialog.cpp" />
-    <ClCompile Include="OsrWindow\osr_renderer.cc" />
     <ClCompile Include="PluginDefinition.cpp" />
-    <ClCompile Include="simple_app.cc" />
-    <ClCompile Include="simple_handler.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CCefSimple.h" />
+    <ClInclude Include="Cef\ClientHandler.h" />
+    <ClInclude Include="Cef\NppCefApp.h" />
+    <ClInclude Include="Cef\NppDialog.h" />
     <ClInclude Include="DockingFeature\DockingDlgInterface.h" />
     <ClInclude Include="DockingFeature\GoToLineDlg.h" />
     <ClInclude Include="DockingFeature\resource.h" />
@@ -367,15 +366,10 @@ if %errorlevel% neq 0 goto :VCEnd
     <ClInclude Include="DockingFeature\Window.h" />
     <ClInclude Include="menuCmdID.h" />
     <ClInclude Include="Notepad_plus_msgs.h" />
-    <ClInclude Include="OsrWindow\NppCefApp.h" />
-    <ClInclude Include="OsrWindow\NppDialog.h" />
-    <ClInclude Include="OsrWindow\osr_renderer.h" />
     <ClInclude Include="PluginDefinition.h" />
     <ClInclude Include="PluginInterface.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="Scintilla.h" />
-    <ClInclude Include="simple_app.h" />
-    <ClInclude Include="simple_handler.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DockingFeature\goLine.rc" />

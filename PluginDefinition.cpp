@@ -25,15 +25,13 @@
 #include <time.h>
 #include <shlwapi.h>
 #include "GoToLineDlg.h"
-#include "CCefSimple.h"
-#include "OsrWindow\NppDialog.h"
+#include "Cef\NppDialog.h"
 
 const TCHAR sectionName[] = TEXT("Insert Extesion");
 const TCHAR keyName[] = TEXT("doCloseTag");
 const TCHAR configFileName[] = TEXT("pluginDemo.ini");
 
 DemoDlg _goToLine;
-CCefSimple _cefSimple;
 NppDialog _nppDialog;
 
 #ifdef UNICODE 

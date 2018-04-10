@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
-    <Filter Include="OsrWindow">
+    <Filter Include="Cef">
       <UniqueIdentifier>{bc3e954e-794a-47d9-9683-8ee18f6bc16e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -30,23 +30,14 @@
     <ClCompile Include="DockingFeature\StaticDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CCefSimple.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cef\NppCefApp.cpp">
+      <Filter>Cef</Filter>
     </ClCompile>
-    <ClCompile Include="simple_app.cc">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cef\NppDialog.cpp">
+      <Filter>Cef</Filter>
     </ClCompile>
-    <ClCompile Include="simple_handler.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OsrWindow\NppCefApp.cpp">
-      <Filter>OsrWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="OsrWindow\NppDialog.cpp">
-      <Filter>OsrWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="OsrWindow\osr_renderer.cc">
-      <Filter>OsrWindow</Filter>
+    <ClCompile Include="Cef\ClientHandler.cc">
+      <Filter>Cef</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,26 +71,17 @@
     <ClInclude Include="DockingFeature\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCefSimple.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="simple_app.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="simple_handler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OsrWindow\NppCefApp.h">
-      <Filter>OsrWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="OsrWindow\NppDialog.h">
-      <Filter>OsrWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="OsrWindow\osr_renderer.h">
-      <Filter>OsrWindow</Filter>
-    </ClInclude>
     <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cef\NppCefApp.h">
+      <Filter>Cef</Filter>
+    </ClInclude>
+    <ClInclude Include="Cef\NppDialog.h">
+      <Filter>Cef</Filter>
+    </ClInclude>
+    <ClInclude Include="Cef\ClientHandler.h">
+      <Filter>Cef</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

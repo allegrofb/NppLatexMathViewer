@@ -2,10 +2,10 @@
 #define NPP_DIALOG_H
 
 #include "DockingDlgInterface.h"
-#include "resource.h"
 #include <string>
-#include "simple_app.h"
 #include "resource1.h"
+#include "resource.h"
+#include "NppCefApp.h"
 
 class NppDialog : public DockingDlgInterface
 {

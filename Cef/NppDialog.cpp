@@ -17,7 +17,7 @@
 
 #include "NppDialog.h"
 #include "PluginDefinition.h"
-#include "..\simple_handler.h"
+#include "ClientHandler.h"
 #include "windows.h"
 
 extern NppData nppData;
@@ -207,7 +207,7 @@ void NppDialog::InitCef()
 	//}
 
 	// Optional implementation of the CefApp interface.
-	CefRefPtr<SimpleApp> app(new SimpleApp);
+	CefRefPtr<NppCefApp> app(new NppCefApp);
 
 	// Populate this structure to customize CEF behavior.
 	CefSettings settings;

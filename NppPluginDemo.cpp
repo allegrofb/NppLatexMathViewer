@@ -19,7 +19,7 @@
 #include <shlwapi.h>
 #include <regex>
 #include "GoToLineDlg.h"
-#include "simple_handler.h"
+#include "Cef\ClientHandler.h"
 #include "PluginDefinition.h"
 
 extern FuncItem funcItem[nbFunc];

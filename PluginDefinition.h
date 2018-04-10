@@ -22,7 +22,7 @@
 // All difinitions of plugin interface
 //
 #include "PluginInterface.h"
-#include "OsrWindow\NppDialog.h"
+#include "Cef\NppDialog.h"
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
