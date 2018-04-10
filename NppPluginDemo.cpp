@@ -90,14 +90,29 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 				::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)content);
 
 				std::string jcode = std::string(content);
+				size_t i = std::string::npos;
 				if (jcode.length() >= 2)
 				{
-					jcode = jcode.replace(jcode.find("\r\n"), 2, "");
+					if ((i = jcode.find("\r\n")) != std::string::npos)
+					{
+						jcode = jcode.replace(i, 2, "");
+					}
+				}
+
+				if (jcode.length() >= 1)
+				{
+					if ((i = jcode.find("\n")) != std::string::npos)
+					{
+						jcode = jcode.replace(i, 1, "");
+					}
+					if ((i = jcode.find("\r")) != std::string::npos)
+					{
+						jcode = jcode.replace(i, 1, "");
+					}
 				}
 
 				std::regex ex("\\\\");
 				std::string jcode2 = std::regex_replace(jcode, ex, "\\\\");
-
 				SimpleHandler::GetInstance()->ExecuteJavascript("UpdateMath('" + jcode2 + "');");
 				//SimpleHandler::GetInstance()->ExecuteJavascript("alert('" + jcode + "');");
 			}
@@ -122,16 +137,31 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 				::SendMessage(nppData._scintillaMainHandle, SCI_GETCURLINE, 255, (LPARAM)content);
 
 				std::string jcode = std::string(content);
+				size_t i = std::string::npos;
 				if (jcode.length() >= 2)
 				{
-					jcode = jcode.replace(jcode.find("\r\n"), 2, "");
+					if ((i = jcode.find("\r\n")) != std::string::npos)
+					{
+						jcode = jcode.replace(i, 2, "");
+					}
+				}
+
+				if (jcode.length() >= 1)
+				{
+					if ((i = jcode.find("\n")) != std::string::npos)
+					{
+						jcode = jcode.replace(i, 1, "");
+					}
+					if ((i = jcode.find("\r")) != std::string::npos)
+					{
+						jcode = jcode.replace(i, 1, "");
+					}
 				}
 
 				std::regex ex("\\\\");
 				std::string jcode2 = std::regex_replace(jcode, ex, "\\\\");
-
 				SimpleHandler::GetInstance()->ExecuteJavascript("UpdateMath('" + jcode2 + "');");
-				//SimpleHandler::GetInstance()->ExecuteJavascript("alert('" + jcode + "');");
+
 			}
 			break;
 		}
