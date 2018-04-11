@@ -45,9 +45,9 @@ std::string GetMimeType(const std::string& resource_path) {
   return "text/html";
 }
 
-CefRefPtr<CefResourceHandler> GetResourceHandler(
+CefRefPtr<CefResourceHandler> GetResourceHandler(HINSTANCE hInst,
     const std::string& resource_path) {
-  CefRefPtr<CefStreamReader> reader = GetResourceReader(resource_path);
+  CefRefPtr<CefStreamReader> reader = GetResourceReader(hInst, resource_path);
   if (!reader)
     return NULL;
 

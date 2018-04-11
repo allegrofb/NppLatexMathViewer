@@ -22,10 +22,10 @@ SimpleHandler* g_instance = NULL;
 
 
 // Add example Providers to the CefResourceManager.
-void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager) {
+void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager, HINSTANCE hInst) {
 	if (!CefCurrentlyOn(TID_IO)) {
 		// Execute on the browser IO thread.
-		CefPostTask(TID_IO, base::Bind(SetupResourceManager, resource_manager));
+		CefPostTask(TID_IO, base::Bind(SetupResourceManager, resource_manager, hInst));
 		return;
 	}
 
@@ -35,7 +35,7 @@ void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager) {
 #if defined(OS_WIN)
 	// Read BINARY resources from the executable.
 	resource_manager->AddProvider(
-		shared::CreateBinaryResourceProvider(test_origin), 100, std::string());
+		shared::CreateBinaryResourceProvider(test_origin, hInst), 100, std::string());
 #elif defined(OS_POSIX)
 	// Read individual resource files from a directory on disk.
 	std::string resource_dir;
@@ -48,13 +48,13 @@ void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager) {
 
 }  // namespace
 
-SimpleHandler::SimpleHandler(bool use_views)
+SimpleHandler::SimpleHandler(bool use_views, HINSTANCE hInst)
     : use_views_(use_views), is_closing_(false) {
   DCHECK(!g_instance);
   g_instance = this;
 
   resource_manager_ = new CefResourceManager();
-  SetupResourceManager(resource_manager_);
+  SetupResourceManager(resource_manager_, hInst);
 
 }
 

@@ -49,20 +49,20 @@ int GetResourceId(const std::string& resource_path);
 // beginning with |root_url| will be handled by this provider. See the
 // "resource_manager" target for example usage.
 CefResourceManager::Provider* CreateBinaryResourceProvider(
-    const std::string& root_url);
+    const std::string& root_url, HINSTANCE hInst);
 #endif  // defined(OS_WIN)
 
 // Retrieve |resource_path| contents as a std::string. Returns false if the
 // resource is not found.
-bool GetResourceString(const std::string& resource_path, std::string& out_data);
+bool GetResourceString(HINSTANCE hInst, const std::string& resource_path, std::string& out_data);
 
 // Retrieve |resource_path| contents as a CefStreamReader. Returns NULL if the
 // resource is not found.
-CefRefPtr<CefStreamReader> GetResourceReader(const std::string& resource_path);
+CefRefPtr<CefStreamReader> GetResourceReader(HINSTANCE hInst, const std::string& resource_path);
 
 // Retrieve |resource_path| contents as a CefResourceHandler. Returns NULL if
 // the resource is not found.
-CefRefPtr<CefResourceHandler> GetResourceHandler(
+CefRefPtr<CefResourceHandler> GetResourceHandler(HINSTANCE hInst,
     const std::string& resource_path);
 
 }  // namespace shared

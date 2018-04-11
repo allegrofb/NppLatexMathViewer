@@ -152,7 +152,7 @@ void NppDialog::Shutdown()
 
 void NppDialog::CreateBrowser()
 {
-	CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));
+	CefRefPtr<SimpleHandler> handler(new SimpleHandler(false, _hInst));
 	CefWindowInfo window_info;
 	RECT rect,rectnew;
 
@@ -168,7 +168,9 @@ void NppDialog::CreateBrowser()
 	CefBrowserSettings settings;
 	//CefBrowserHost::CreateBrowser(window_info, handler, "www.baidu.com", settings, NULL);
 	CefString url = _path + L"\\example.html";
-	//CefString url = GetStartupURL();
+	//CefString url = GetStartupURL();   
+	//[0411/104605.198:INFO:CONSOLE(80)] "Uncaught ReferenceError: MathJax is not defined", source: https://latexmathviewer.com/example.html (80)
+	//all the related files should put into resouce manager
 	CefBrowserHost::CreateBrowser(window_info, handler, url, settings, NULL);
 
 	//CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));

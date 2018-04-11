@@ -15,20 +15,17 @@ class SimpleHandler : public CefClient,
 					  public CefRequestHandler,
                       public CefLoadHandler {
  public:
-  explicit SimpleHandler(bool use_views);
+  explicit SimpleHandler(bool use_views, HINSTANCE hInst);
   ~SimpleHandler();
 
   // Provide access to the single global instance of this object.
   static SimpleHandler* GetInstance();
 
   // CefClient methods:
-  virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE {
-    return this;
-  }
-  virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE {
-    return this;
-  }
-  virtual CefRefPtr<CefLoadHandler> GetLoadHandler() OVERRIDE { return this; }
+  CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE { return this; }
+  CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE { return this; }
+  CefRefPtr<CefLoadHandler> GetLoadHandler() OVERRIDE { return this; }
+  CefRefPtr<CefRequestHandler> GetRequestHandler() OVERRIDE { return this; }
 
   // CefDisplayHandler methods:
   virtual void OnTitleChange(CefRefPtr<CefBrowser> browser,
@@ -46,6 +43,17 @@ class SimpleHandler : public CefClient,
                            const CefString& errorText,
                            const CefString& failedUrl) OVERRIDE;
 
+  // CefRequestHandler methods:
+  cef_return_value_t OnBeforeResourceLoad(
+	  CefRefPtr<CefBrowser> browser,
+	  CefRefPtr<CefFrame> frame,
+	  CefRefPtr<CefRequest> request,
+	  CefRefPtr<CefRequestCallback> callback) OVERRIDE;
+  CefRefPtr<CefResourceHandler> GetResourceHandler(
+	  CefRefPtr<CefBrowser> browser,
+	  CefRefPtr<CefFrame> frame,
+	  CefRefPtr<CefRequest> request) OVERRIDE;
+
   // Request that all existing browser windows close.
   void CloseAllBrowsers(bool force_close);
 
@@ -54,24 +62,6 @@ class SimpleHandler : public CefClient,
   void OnSize(int width, int height);
   void ExecuteJavascript(std::string content);
 
-  ///
-  // Called from CefRequestHandler::OnBeforeResourceLoad on the browser process
-  // IO thread.
-  ///
-  cef_return_value_t OnBeforeResourceLoad(
-	  CefRefPtr<CefBrowser> browser,
-	  CefRefPtr<CefFrame> frame,
-	  CefRefPtr<CefRequest> request,
-	  CefRefPtr<CefRequestCallback> callback);
-
-  ///
-  // Called from CefRequestHandler::GetResourceHandler on the browser process
-  // IO thread.
-  ///
-  CefRefPtr<CefResourceHandler> GetResourceHandler(
-	  CefRefPtr<CefBrowser> browser,
-	  CefRefPtr<CefFrame> frame,
-	  CefRefPtr<CefRequest> request);
 
  private:
   // Platform-specific implementation.
