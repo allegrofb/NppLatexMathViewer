@@ -105,6 +105,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="example.html" />
+    <None Include="example.html">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

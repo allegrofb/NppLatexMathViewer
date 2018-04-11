@@ -19,6 +19,16 @@
 #include "PluginDefinition.h"
 #include "ClientHandler.h"
 #include "windows.h"
+#include "resource_util.h"
+
+namespace {
+
+	std::string GetStartupURL() {
+		return shared::kTestOrigin + std::string("example.html");
+	}
+
+}  // namespace
+
 
 extern NppData nppData;
 
@@ -158,6 +168,7 @@ void NppDialog::CreateBrowser()
 	CefBrowserSettings settings;
 	//CefBrowserHost::CreateBrowser(window_info, handler, "www.baidu.com", settings, NULL);
 	CefString url = _path + L"\\example.html";
+	//CefString url = GetStartupURL();
 	CefBrowserHost::CreateBrowser(window_info, handler, url, settings, NULL);
 
 	//CefRefPtr<SimpleHandler> handler(new SimpleHandler(false));

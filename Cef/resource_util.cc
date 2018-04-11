@@ -9,7 +9,7 @@
 
 namespace shared {
 
-const char kTestOrigin[] = "https://example.com/";
+const char kTestOrigin[] = "https://latexmathviewer.com/";
 
 namespace {
 

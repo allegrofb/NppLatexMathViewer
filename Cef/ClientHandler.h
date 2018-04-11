@@ -12,6 +12,7 @@
 class SimpleHandler : public CefClient,
                       public CefDisplayHandler,
                       public CefLifeSpanHandler,
+					  public CefRequestHandler,
                       public CefLoadHandler {
  public:
   explicit SimpleHandler(bool use_views);
@@ -52,6 +53,25 @@ class SimpleHandler : public CefClient,
 
   void OnSize(int width, int height);
   void ExecuteJavascript(std::string content);
+
+  ///
+  // Called from CefRequestHandler::OnBeforeResourceLoad on the browser process
+  // IO thread.
+  ///
+  cef_return_value_t OnBeforeResourceLoad(
+	  CefRefPtr<CefBrowser> browser,
+	  CefRefPtr<CefFrame> frame,
+	  CefRefPtr<CefRequest> request,
+	  CefRefPtr<CefRequestCallback> callback);
+
+  ///
+  // Called from CefRequestHandler::GetResourceHandler on the browser process
+  // IO thread.
+  ///
+  CefRefPtr<CefResourceHandler> GetResourceHandler(
+	  CefRefPtr<CefBrowser> browser,
+	  CefRefPtr<CefFrame> frame,
+	  CefRefPtr<CefRequest> request);
 
  private:
   // Platform-specific implementation.

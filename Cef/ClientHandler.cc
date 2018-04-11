@@ -52,6 +52,10 @@ SimpleHandler::SimpleHandler(bool use_views)
     : use_views_(use_views), is_closing_(false) {
   DCHECK(!g_instance);
   g_instance = this;
+
+  resource_manager_ = new CefResourceManager();
+  SetupResourceManager(resource_manager_);
+
 }
 
 SimpleHandler::~SimpleHandler() {
@@ -210,4 +214,23 @@ void SimpleHandler::ExecuteJavascript(std::string content)
 }
 
 
+cef_return_value_t SimpleHandler::OnBeforeResourceLoad(
+	CefRefPtr<CefBrowser> browser,
+	CefRefPtr<CefFrame> frame,
+	CefRefPtr<CefRequest> request,
+	CefRefPtr<CefRequestCallback> callback) {
+	CEF_REQUIRE_IO_THREAD();
+
+	return resource_manager_->OnBeforeResourceLoad(browser, frame, request,
+		callback);
+}
+
+CefRefPtr<CefResourceHandler> SimpleHandler::GetResourceHandler(
+	CefRefPtr<CefBrowser> browser,
+	CefRefPtr<CefFrame> frame,
+	CefRefPtr<CefRequest> request) {
+	CEF_REQUIRE_IO_THREAD();
+
+	return resource_manager_->GetResourceHandler(browser, frame, request);
+}
 
